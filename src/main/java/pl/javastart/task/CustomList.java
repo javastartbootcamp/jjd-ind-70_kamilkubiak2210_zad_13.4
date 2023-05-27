@@ -15,7 +15,7 @@ public class CustomList<T> {
     }
 
     public T get(int index) {
-        checkIndexBoundsForGetAndRemove(index);
+        checkIndexBounds(index);
         return (T) objects[index];
     }
 
@@ -25,7 +25,7 @@ public class CustomList<T> {
     }
 
     public void add(int index, T element) {
-        checkIndexBoundsForAdd(index);
+        checkIndexBounds(index);
         ensureCapacity(size + 1);
         System.arraycopy(objects, index, objects, index + 1, size - index);
         objects[index] = element;
@@ -37,7 +37,7 @@ public class CustomList<T> {
     }
 
     public void remove(int index) {
-        checkIndexBoundsForGetAndRemove(index);
+        checkIndexBounds(index);
         int numElements = size - index - 1;
         if (numElements > 0) {
             System.arraycopy(objects, index + 1, objects, index, numElements);
@@ -55,13 +55,7 @@ public class CustomList<T> {
         }
     }
 
-    private void checkIndexBoundsForGetAndRemove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-        }
-    }
-
-    private void checkIndexBoundsForAdd(int index) {
+    private void checkIndexBounds(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
